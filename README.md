@@ -9,7 +9,7 @@ TODO: Delete this and the text above, and describe your gem
 Add this line to your application's Gemfile:
 
 ```ruby
-gem 'hash_initializer'
+gem 'hash_initializer', git: 'https://github.com/sogasusumu/hash_initializer.git'
 ```
 
 And then execute:
@@ -22,7 +22,21 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+`HashInitializer`を、`Class`に、`include`すると、`initialize`時に`Hash`を引数に取らせる事で、Hashのキーに該当する、インスタンス変数に値を格納することができます。
+
+```ruby
+argument = {a: 'a', b: 'b', invalid: 'invalid'}
+
+class A
+  include HashInitializer
+  attr_accessor :a, :b
+end
+
+A.new(argument) # => #<A:0x00007f9713affbc0 @a="a", @b="b">
+
+argument = 'Invalid'
+A.new(argument) # => ArgumentError (String is not allow, argument should be Hash.)
+```
 
 ## Development
 
